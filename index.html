@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rollingCounterApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Five Rolling Days</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <script>"https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="counter.js"></script>
+  </head>
+  <body ng-controller="FiveDayCtrl as fiveDay">
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Round Trip Counter</h1>
+        <p>This is what the app does</p>
+      </div>
+      <div class="alert {{fiveDay.alertType()}}" role="alert"><b>{{fiveDay.roundtripsLeft()}}</b> round trips left</div>
+
+      <form>
+        <div class="form-group">
+          <label>Date
+            <input ng-model="date" type="date" class="form-control" required>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label>Roundtrips
+            <input ng-model="roundtrips" type="number" class="form-control" required>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-default" ng-click="fiveDay.add()">Add</button>
+      </form>
+      <ul id="datapoints">
+        <li ng-repeat="trade in fiveDay.trades">
+          <span>{{trade.date | date:'MM/dd/yyyy'}} : {{trade.roundtrips}}</span>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
